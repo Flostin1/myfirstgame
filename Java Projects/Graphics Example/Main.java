@@ -19,7 +19,7 @@ public class Main {
     static JFrame frame;
     static DrawPanel drawPanel;
 
-    private Heart[] hearts = new Heart[60];
+    private Heart[] hearts;
 
     // The width and height of the canvas
     private int width = 600;
@@ -37,8 +37,15 @@ public class Main {
 
         frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
 
-        for (int i = 0; i < hearts.length; i++) {
-            hearts[i] = new Heart(200, 200);
+        int index = 0;
+        int size = 5;
+        double sizeRatio = (width / size);
+
+        hearts = new Heart[size * size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                hearts[index++] = new Heart(i * sizeRatio + sizeRatio / 4, j * sizeRatio + sizeRatio / 4);
+            }
         }
 
         frame.setResizable(false);
@@ -53,6 +60,7 @@ public class Main {
             for (Heart heart : hearts) {
                 heart.update();
                 heart.checkForWalls(width, height);
+                heart.checkForHearts(hearts);
             }
 
             try {
