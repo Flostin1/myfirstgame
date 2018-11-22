@@ -19,8 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Main {
-    static JFrame frame;
-    static DrawPanel canvas;
+    private static JFrame frame;
+    private static DrawPanel canvas;
 
     // The width and height of the canvas
     private int width = 600;
@@ -30,7 +30,7 @@ public class Main {
 
     // Image files...
     private BufferedImage checkerBoard = loadImage("Checker_Board.jpg");
-    
+
     public static void main(String[] args) throws IOException {
         new Main().init();
     }
@@ -94,7 +94,12 @@ public class Main {
         @Override
         // Code to be drawn...
         public void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D)g;
+
             super.paintComponent(g);
+
+            g2d.drawImage(checkerBoard, 0, 0, width, height, null);
+            Piece.drawPieces(checkerPieces, g2d);
         }
     }
 }
