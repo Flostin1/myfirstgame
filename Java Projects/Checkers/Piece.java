@@ -68,8 +68,4 @@ public class Piece {
             return -1;
         }
     }
-
-    public static void setCurrentPiece() {
-        
-    }
 }

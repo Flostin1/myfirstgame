@@ -18,8 +18,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Color;
-import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
@@ -43,7 +41,6 @@ public class Main {
 
     //Game variables
     private String turn = "Red";
-    private Color semiGreen = new Color(0, 255, 0, 100);
 
     // Image files...
     private BufferedImage checkerBoard = loadImage("Checker_Board.jpg");
@@ -117,14 +114,11 @@ public class Main {
             g2d.drawImage(checkerBoard, 0, 0, width, height, null);
 
             Piece.drawPieces(g2d);
-
-            g2d.setColor(semiGreen);
-            if (CurrentTile.getValue() > 0) {
-                g2d.fillOval(CurrentTile.getX() * 75 + 7, CurrentTile.getY() * 75 + 7, 60, 60);
-            }
+            CurrentTile.drawSelector(g2d);
         }
     }
 
+    // This class is responsible for listening for the user's mouse
     private class MouseHandler extends MouseAdapter implements MouseListener, MouseMotionListener {
         public MouseHandler() {
             canvas.addMouseListener(this);
